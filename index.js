@@ -3,12 +3,16 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 
-const PORT = 8080;
+const PORT = import.meta.env.PORT || 8080;
 const FILE_STORAGE_PATH = __dirname + "/server_files";
 
 const app = express();
 
 app.use(cors());
+
+app.get("/", (req, res) => {
+  res.send("Backend for file-viewer.");
+});
 
 app.get("/api/files", (req, res, next) => {
   const dirPath = req.query.dir_path;
