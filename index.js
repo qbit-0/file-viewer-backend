@@ -23,18 +23,18 @@ app.get("/api/files", (req, res) => {
       return res.status(500).send();
     }
 
-    let filesRes;
+    let filesInfo;
     if (!files) {
-      filesRes = [];
+      filesInfo = [];
     } else {
-      filesRes = files.map((file) => ({
+      filesInfo = files.map((file) => ({
         name: file.name,
         isDirectory: file.isDirectory(),
         isFile: file.isFile(),
       }));
     }
 
-    res.json(filesRes);
+    res.json(filesInfo);
   });
 });
 
