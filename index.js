@@ -15,13 +15,8 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/files", (req, res) => {
-  const dirPath = req.query.dir_path;
-  let fullPath;
-  if (dirPath) {
-    fullPath = path.join(FILE_STORAGE_PATH, dirPath);
-  } else {
-    fullPath = FILE_STORAGE_PATH;
-  }
+  const dirPath = req.query.dir_path || "";
+  const fullPath = path.join(FILE_STORAGE_PATH, dirPath);
 
   fs.readdir(fullPath, { withFileTypes: true }, (err, files) => {
     if (err) {
@@ -44,13 +39,8 @@ app.get("/api/files", (req, res) => {
 });
 
 app.get("/api/file", (req, res) => {
-  const filePath = req.query.file_path;
-  let fullPath;
-  if (filePath) {
-    fullPath = path.join(FILE_STORAGE_PATH, filePath);
-  } else {
-    fullPath = FILE_STORAGE_PATH;
-  }
+  const filePath = req.query.file_path || "";
+  const fullPath = path.join(FILE_STORAGE_PATH, filePath);
   res.sendFile(fullPath);
 });
 
